@@ -1,3 +1,27 @@
-<p><%= todo_item.content %></p>
-<%= link_to "Borrar", todo_list_todo_item_path(@todo_list, todo_item.id),
+<div class="row clearfix">
+    <% if todo_item.completed? %>
+      <div class="completed">
+        <%= link_to "Marcar como Realizado.",
+              complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch %>
+      </div>
+      <div class="todo_item">
+        <p style="opacity: 0.4;"><strike><%= todo_item.content %></strike></p>
+      </div>
+      <div class="trash">
+        <%= link_to "Borrar", todo_list_todo_item_path(@todo_list, todo_item.id),
             method: :delete, data: { confirm: "Seguro?" } %>
+      </div>
+    <% else %>
+      <div class="completed">
+        <%= link_to "Marcar como Realizado.",
+              complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch %>
+      </div>
+      <div class="todo_item">
+        <p><%= todo_item.content %></p>
+      </div>
+      <div class="trash">
+        <%= link_to "Borrar", todo_list_todo_item_path(@todo_list, todo_item.id),
+            method: :delete, data: { confirm: "Seguro?" } %>
+        </div>
+      <% end %>
+</div>
